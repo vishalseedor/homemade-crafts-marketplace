@@ -32,7 +32,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     )
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.bottomRight,
@@ -44,12 +44,12 @@ class _CategoryPageState extends State<CategoryPage> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             IconButton(
-                              icon: Icon(Icons.arrow_back_ios, color: Colors.white,), 
+                              icon: const Icon(Icons.arrow_back_ios, color: Colors.white,), 
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -57,23 +57,23 @@ class _CategoryPageState extends State<CategoryPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                FadeInUp(duration: Duration(milliseconds: 1200), child: IconButton(
-                                  icon: Icon(Icons.search, color: Colors.white,), onPressed: () {},
+                                FadeInUp(duration: const Duration(milliseconds: 1200), child: IconButton(
+                                  icon: const Icon(Icons.search, color: Colors.white,), onPressed: () {},
                                 )),
-                                FadeInUp(duration: Duration(milliseconds: 1200), child: IconButton(
-                                  icon: Icon(Icons.favorite, color: Colors.white,), onPressed: () {},
+                                FadeInUp(duration: const Duration(milliseconds: 1200), child: IconButton(
+                                  icon: const Icon(Icons.favorite, color: Colors.white,), onPressed: () {},
                                 )),
-                                FadeInUp(duration: Duration(milliseconds: 1300), child: IconButton(
-                                  icon: Icon(Icons.shopping_cart, color: Colors.white,), onPressed: () {},
+                                FadeInUp(duration: const Duration(milliseconds: 1300), child: IconButton(
+                                  icon: const Icon(Icons.shopping_cart, color: Colors.white,), onPressed: () {},
                                 )),
                               ],
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        FadeInUp(duration: Duration(milliseconds: 1200), child: Text(widget.title!, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 40),))
+                        FadeInUp(duration: const Duration(milliseconds: 1200), child: Text(widget.title!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 40),))
                       ],
                     ),
                   ),
@@ -81,10 +81,10 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: <Widget>[
-                  FadeInUp(duration: Duration(milliseconds: 1400), child: Row(
+                  FadeInUp(duration: const Duration(milliseconds: 1400), child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text("New Product", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
@@ -97,12 +97,12 @@ class _CategoryPageState extends State<CategoryPage> {
                       ),
                     ],
                   )),
-                  SizedBox(height: 20,),
-                  FadeInUp(duration: Duration(milliseconds: 1500), child:  makeProduct(image: 'assets/beauty-1.jpg', title: 'Beauty', price: '100\$')),
-                  FadeInUp(duration: Duration(milliseconds: 1600), child:  makeProduct(image: 'assets/clothes-1.jpg', title: 'Clothes', price: '100\$')),
-                  FadeInUp(duration: Duration(milliseconds: 1700), child:  makeProduct(image: 'assets/glass.jpg', title: 'Glass', price: '100\$')),
-                  FadeInUp(duration: Duration(milliseconds: 1800), child:  makeProduct(image: 'assets/perfume.jpg', title: 'Perfume', price: '100\$')),
-                  FadeInUp(duration: Duration(milliseconds: 1900), child:  makeProduct(image: 'assets/person.jpg', title: 'Person', price: '100\$')),
+                  const SizedBox(height: 20,),
+                  FadeInUp(duration: const Duration(milliseconds: 1500), child:  makeProduct(image: 'assets/category1.jpg', title: 'Paper Craft', price: '100\$')),
+                  FadeInUp(duration: const Duration(milliseconds: 1600), child:  makeProduct(image: 'assets/category2.jpg', title: 'Bottle Craft', price: '100\$')),
+                  FadeInUp(duration: const Duration(milliseconds: 1700), child:  makeProduct(image: 'assets/category3.jpg', title: 'Coconut Shell Craft', price: '100\$')),
+                  FadeInUp(duration: const Duration(milliseconds: 1800), child:  makeProduct(image: 'assets/category4.jpg', title: 'Thread Craft', price: '100\$')),
+                  FadeInUp(duration: const Duration(milliseconds: 1900), child:  makeProduct(image: 'assets/person.jpg', title: 'Person', price: '100\$')),
                 ],
               ),
             )
@@ -116,7 +116,7 @@ class _CategoryPageState extends State<CategoryPage> {
     return Container(
       height: 200,
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
@@ -125,7 +125,7 @@ class _CategoryPageState extends State<CategoryPage> {
         )
       ),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: LinearGradient(
@@ -140,7 +140,7 @@ class _CategoryPageState extends State<CategoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            FadeInUp(duration: Duration(milliseconds: 1400), child: Align(
+            FadeInUp(duration: const Duration(milliseconds: 1400), child: const Align(
               alignment: Alignment.topRight,
               child: Icon(Icons.favorite_border, color: Colors.white,),
             )),
@@ -151,15 +151,15 @@ class _CategoryPageState extends State<CategoryPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    FadeInUp(duration: Duration(milliseconds: 1500), child: Text(title, style: TextStyle(color: Colors.white, fontSize: 20),)),
-                    FadeInUp(duration: Duration(milliseconds: 1500), child: Text(price, style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),)),
+                    FadeInUp(duration: const Duration(milliseconds: 1500), child: Text(title, style: const TextStyle(color: Colors.white, fontSize: 20),)),
+                    FadeInUp(duration: const Duration(milliseconds: 1500), child: Text(price, style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),)),
                   ],
                 ),
-                FadeInUp(duration: Duration(milliseconds: 2000), child: Container(
+                FadeInUp(duration: const Duration(milliseconds: 2000), child: Container(
                   width: 40,
                   height: 40,
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white
                   ),
