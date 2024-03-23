@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/loadingscreen.dart';
+import 'package:homemade_marketplace_project/Screens/CategoryScreen/widgets/categorynewwidget.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/loadingscreen.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/provider/categoryprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/widgets/categorywidget.dart';
@@ -38,12 +39,12 @@ class _CategoryNewScreenState extends State<CategoryNewScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
         child: Column(
           children: [
-            SizedBox(
-              height: size.height*0.07,
-              child: TextField(decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none),fillColor:Colors.grey[200],filled: true,hintText: 'Search',
-              hintStyle: TextStyle(color: colors,fontWeight: FontWeight.w400),prefixIcon: Icon(Icons.search,color: colors,)
-              )),
-            ),
+            // SizedBox(
+            //   height: size.height*0.07,
+            //   child: TextField(decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none),fillColor:Colors.grey[200],filled: true,hintText: 'Search',
+            //   hintStyle: TextStyle(color: colors,fontWeight: FontWeight.w400),prefixIcon: Icon(Icons.search,color: colors,)
+            //   )),
+            // ),
             SizedBox(height: size.height*0.02),
             Expanded(
               child: FadeInUp(
@@ -76,7 +77,7 @@ class _CategoryNewScreenState extends State<CategoryNewScreen> {
                                       scrollDirection: Axis.vertical,
                                       itemCount: category.category.length,
                                       itemBuilder: (context, intex) {
-                                        return AllCategoryWidget(
+                                        return AllCategoryNewWidget(
                                           id: category.category[intex].id,
                                           name: category.category[intex].name,
                                           image: category.category[intex].photo,

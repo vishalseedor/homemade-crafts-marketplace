@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/CartScreen/models/cartmodel.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/models/cartmodel.dart';
 import 'package:http/http.dart' as https;
 import 'package:provider/provider.dart';
 

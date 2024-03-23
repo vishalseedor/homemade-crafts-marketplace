@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/errorscreen.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/loadingscreen.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/errorscreen.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/loadingscreen.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/provider/categoryprovider.dart';
 import 'package:provider/provider.dart';
 

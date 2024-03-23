@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/circle.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/circle.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 
 class LoadingScreen extends StatelessWidget {

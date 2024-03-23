@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:homemade_marketplace_project/Helpers/colors.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/provider/favouriteprovider.dart';
+import 'package:provider/provider.dart';
 
 class AllFavouriteWidget extends StatefulWidget {
   final String id;
@@ -15,7 +18,7 @@ class _AllFavouriteWidgetState extends State<AllFavouriteWidget> {
   bool isfav=false;
   @override
   Widget build(BuildContext context) {
-
+   final fav = Provider.of<FavouriteProvider>(context);
      return AspectRatio(
   aspectRatio: 3 / 2.2,
   child: Stack(
@@ -66,9 +69,21 @@ class _AllFavouriteWidgetState extends State<AllFavouriteWidget> {
           color: isfav ? Colors.red : Colors.black,
         ),
               onPressed: () {
-                setState(() {
-                  isfav=!isfav;
-                });
+                   fav.deleteFavourite(widget.id,context);
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                           backgroundColor: colors,
+                           content: const Text(
+                             'Favouite item Deleted successfully!',
+                             style: TextStyle(
+                                 color: Colors.white,
+                                 fontWeight: FontWeight.bold),
+                           ),
+                           duration: const Duration(seconds: 4),
+                         ));
+                // setState(() {
+                //   isfav=!isfav;
+                // });
                 // Add your onPressed logic here
               },
             ),

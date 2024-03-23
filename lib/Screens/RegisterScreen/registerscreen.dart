@@ -1,7 +1,7 @@
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
-import 'package:homemade_marketplace_project/Screens/HomeScreen/homescreen.dart';
 import 'package:homemade_marketplace_project/Screens/LoginScreen/loginscreen.dart';
 import 'package:http/http.dart'as http;
 
@@ -21,39 +21,70 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController passwordcontroller=TextEditingController();
 
       final _formKey = GlobalKey<FormState>();
-  Future<void>registerHomemadeCraft(
+void registerHomemadeCraft(String firstname, String lastname,String email,String phone,String password) async {
+    const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/registration.php';
 
-String firstname,String lastname,String phone,String email,String password) async {
-  const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/registration.php';
+    Map<String, String> body = {
+      'firstname':firstname,
+      'lastname':lastname,
+      'email':email,
+      'phone':phone,
+      'password':password,
 
-  Map<String, String> body = {
-  
-    'firstname':firstname ,
-    'lastname': lastname,
-    'email': email,
-    'phone': phone,
-    'password': password,
-  
-  };
+    
+    };
 
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      body: body,
-      
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: body,
+      );
+      var jsonData = json.decode(response.body);
 
-    if (response.statusCode == 200) {
-      print(body);
-      print("Response body${response.body}");
-      print('Registration successful');
-    } else {
-      print('Error: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        if (jsonData["status"] == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: colors,
+              content: const Text(
+                'Login Successful!',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              duration: const Duration(seconds: 4),
+            ),
+          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const LoginPage()));
+          print(body);
+          print("Response body${response.body}");
+
+          print('Register successful');
+        } else {
+          jsonData["status"] == false;
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor:colors,
+              content: const Text(
+                'Email already Exists',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              duration: const Duration(seconds: 4),
+            ),
+          );
+          print('Error: ${response.statusCode}');
+        }
+      } else {
+        print('fffff');
+      }
+    } catch (error) {
+      print('Error: $error');
     }
-  } catch (error) {
-    print('Error: $error');
   }
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +126,8 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
+                      controller: firstnamecontroller,
+                      keyboardType: TextInputType.text,
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "First Name",
@@ -123,7 +156,8 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
-                      
+                      controller: lastnamecontroller,
+                      keyboardType: TextInputType.text,
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Last Name",
@@ -151,7 +185,8 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
-                    
+                      controller: emailcontroller,
+                      keyboardType: TextInputType.emailAddress,
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Email",
@@ -179,9 +214,11 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
-                     
+                     keyboardType: TextInputType.phone,
+                     controller: phonecontroller,
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                       decoration: InputDecoration(
+                        
                         hintText: "Phone Number",
                         hintStyle: TextStyle(color: Colors.grey.shade600),
                         filled: true,
@@ -207,7 +244,8 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
-                      
+                      controller: passwordcontroller,
+                      keyboardType: TextInputType.visiblePassword,
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
@@ -238,25 +276,18 @@ String firstname,String lastname,String phone,String email,String password) asyn
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: ElevatedButton(
                       
-                      onPressed: () async{
-                        if (_formKey.currentState!.validate()) {
-                                  registerHomemadeCraft(
-                       firstnamecontroller.text.toString(),
-                       lastnamecontroller.text.toString(),
-                       emailcontroller.text.toString(),
-                       phonecontroller.text.toString(),
-                       passwordcontroller.text.toString(),
-                     
-                
-                 );
+                      onPressed: (){
+                         if (_formKey.currentState!.validate()) {
+                          registerHomemadeCraft(
+                            firstnamecontroller.text.toString(),
+                            lastnamecontroller.text.toString(),
+                            emailcontroller.text.toString(),
+                            phonecontroller.text.toString(),
+                            passwordcontroller.text.toString()
 
-
-                 await   Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => LoginPage(),
-                      ),
-                    );
-                  }  
+                            
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(backgroundColor: colors,  shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

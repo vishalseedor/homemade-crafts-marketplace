@@ -1,8 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/CartScreen/provider/cartprovider.dart';
-import 'package:homemade_marketplace_project/CartScreen/widgets/cartwidget.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/loadingscreen.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/pages/cartemptyscreen.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/provider/cartprovider.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/widgets/cartitemwidget.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/widgets/cartwidget.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/loadingscreen.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -60,7 +62,7 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   )
                 : cart.carts.isEmpty
-                    ? const Center(child: Text('hhhh'),)
+                    ? const CartEmptyScreen()
                     : SizedBox(
                      //  height: size.height * 0,
                         child: ListView.builder(
@@ -68,17 +70,26 @@ class _CartScreenState extends State<CartScreen> {
                           scrollDirection: Axis.vertical,
                           itemCount:cart.carts.length,
                           itemBuilder: (context, intex) {
-                            return AllCartWidget(
-                              cartid:cart.carts[intex].id,
-                              userid: cart.carts[intex].userId,
-                              image: cart.carts[intex].file,
-                              price: cart.carts[intex].price,
-                              productid: cart.carts[intex].productId,
-                              productname: cart.carts[intex].productName,
-                              quanity: cart.carts[intex].quantity,
+                            return CartItem(
+                              userid:cart.carts[intex].userId , 
+                              cartid: cart.carts[intex].id,
+                               productid:cart.carts[intex].quantity,
+                                image: cart.carts[intex].file, 
+                                quanity:cart.carts[intex].quantity, 
+                                price: cart.carts[intex].price, 
+                                description: cart.carts[intex].description,
+                                productname: cart.carts[intex].productName);
+                            // return AllCartWidget(
+                            //   cartid:cart.carts[intex].id,
+                            //   userid: cart.carts[intex].userId,
+                            //   image: cart.carts[intex].file,
+                            //   price: cart.carts[intex].price,
+                            //   productid: cart.carts[intex].productId,
+                            //   productname: cart.carts[intex].productName,
+                            //   quanity: cart.carts[intex].quantity,
                              
               
-                            );
+                            // );
                             
                           },
                         ),

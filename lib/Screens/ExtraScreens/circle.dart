@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/dealytween.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/dealytween.dart';
 
 
 

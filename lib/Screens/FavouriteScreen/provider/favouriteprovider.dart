@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/FavouriteScreen/models/favouritemodel.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/models/favouritemodel.dart';
 import 'package:http/http.dart' as https;
 
 
@@ -100,6 +100,24 @@ class FavouriteProvider extends ChangeNotifier {
      
         // Cart deleted successfully
         print('Fav added successfully');
+      } else {
+        // Failed to delete cart
+        print('Failed to delete cart: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error deleting cart: $e');
+    }
+  }
+    Future<void> deleteFavourite(String productId, BuildContext context) async {
+    final url = Uri.parse('http://campus.sicsglobal.co.in/Project/homemade_crafts/API/delete_favourite.php?id=$productId');
+    
+    try {
+      final response = await https.delete(url);
+
+      if (response.statusCode == 200) {
+        getAllFavouritesData();
+        // Cart deleted successfully
+        print('Cart deleted successfully');
       } else {
         // Failed to delete cart
         print('Failed to delete cart: ${response.statusCode}');

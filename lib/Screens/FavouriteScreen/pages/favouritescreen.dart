@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/loadingscreen.dart';
-import 'package:homemade_marketplace_project/FavouriteScreen/provider/favouriteprovider.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/loadingscreen.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/provider/favouriteprovider.dart';
 
-import 'package:homemade_marketplace_project/FavouriteScreen/widgets/favouritewidget.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/widgets/favouritewidget.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:provider/provider.dart';
 

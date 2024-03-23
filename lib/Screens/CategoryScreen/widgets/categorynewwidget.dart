@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:homemade_marketplace_project/Screens/EachCategoryscreen.dart/pages/alleachcategoryscreen.dart';
 
 
-class AllCategoryWidget extends StatefulWidget {
+class AllCategoryNewWidget extends StatefulWidget {
   final String id;
   final String name;
   final String image;
-  const AllCategoryWidget({super.key,required this.id,required this.name,required this.image});
+  const AllCategoryNewWidget({super.key,required this.id,required this.name,required this.image});
 
   @override
-  State<AllCategoryWidget> createState() => _AllCategoryWidgetState();
+  State<AllCategoryNewWidget> createState() => _AllCategoryNewWidgetState();
 }
 
-class _AllCategoryWidgetState extends State<AllCategoryWidget> {
+class _AllCategoryNewWidgetState extends State<AllCategoryNewWidget> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -24,7 +24,7 @@ class _AllCategoryWidgetState extends State<AllCategoryWidget> {
         },
         child: Material(
           child: Container(
-           margin: const EdgeInsets.only(right: 20),
+           
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(

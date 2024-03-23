@@ -1,34 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/Screens/EachCategoryscreen.dart/pages/alleachcategoryscreen.dart';
+import 'package:homemade_marketplace_project/Helpers/colors.dart';
 
 
-class AllCategoryWidget extends StatefulWidget {
-  final String id;
-  final String name;
+
+
+class AllEachCategoryWidget extends StatefulWidget {
+  final String productid;
+  final String productname;
+  final String productprice;
+  final String quantity;
   final String image;
-  const AllCategoryWidget({super.key,required this.id,required this.name,required this.image});
+  
+
+  const AllEachCategoryWidget(
+      {super.key,
+     required this.productid,
+     required this.productname,
+     required this.productprice,
+     required this.quantity,
+     required this.image
+      });
 
   @override
-  State<AllCategoryWidget> createState() => _AllCategoryWidgetState();
+  State<AllEachCategoryWidget > createState() => _AllEachCategoryWidgetState();
 }
 
-class _AllCategoryWidgetState extends State<AllCategoryWidget> {
+class _AllEachCategoryWidgetState extends State<AllEachCategoryWidget > {
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
+    final size = MediaQuery.of(context).size;
+    //  final pet = Provider.of<PetModel>(context);
+
+      return AspectRatio(
       aspectRatio: 2 / 2.2,
       child: GestureDetector(
         onTap: () {
-        Navigator.of(context)
-                .pushNamed(AllCategoryEachScreen.routeName ,arguments:widget.id);
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(image: image, title: title, tag: tag,)));
         },
         child: Material(
           child: Container(
-           margin: const EdgeInsets.only(right: 20),
+          
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(widget.image),
+                image: AssetImage('assets/category2.jpg'),
                 fit: BoxFit.cover
               )
             ),
@@ -47,7 +62,7 @@ class _AllCategoryWidgetState extends State<AllCategoryWidget> {
               child: 
               Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(widget.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),)
+                child: Text(widget.productname, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),)
               ),
             ),
           ),

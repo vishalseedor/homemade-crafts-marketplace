@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
+   
     super.initState();
 
     _scaleController = AnimationController(
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/V.jpg'),
+            image: AssetImage('assets/new.png'),
             fit: BoxFit.cover
           )
         ),

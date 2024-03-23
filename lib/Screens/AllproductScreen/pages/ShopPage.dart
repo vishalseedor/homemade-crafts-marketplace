@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:homemade_marketplace_project/CartScreen/pages/cartscreen.dart';
-import 'package:homemade_marketplace_project/ExtraScreens/loadingscreen.dart';
-import 'package:homemade_marketplace_project/FavouriteScreen/pages/favouritescreen.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/pages/cartscreen.dart';
+import 'package:homemade_marketplace_project/Screens/ExtraScreens/loadingscreen.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/pages/favouritescreen.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Screens/AllproductScreen/provider/productprovider.dart';
 import 'package:homemade_marketplace_project/Screens/AllproductScreen/widgets/allhomeproductwidget.dart';
@@ -11,6 +11,7 @@ import 'package:homemade_marketplace_project/Screens/AllproductScreen/pages/allp
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/pages/categoryscreen.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/provider/categoryprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/widgets/categorywidget.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
@@ -81,15 +82,33 @@ class _ShopPageState extends State<ShopPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            FadeInUp(duration: const Duration(milliseconds: 1500), child: const Text("Our Homemade Crafts Products", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),)),
+                            FadeInUp(duration: const Duration(milliseconds: 1500), child: const Text("Our Homemade Crafts Products", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),)),
                             const SizedBox(height: 15,),
-                            FadeInUp(duration: const Duration(milliseconds: 1700), child: const Row(
-                              children: [
-                                Text("VIEW MORE", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
-                                 SizedBox(width: 5,),
-                                Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15,)
-                              ],
-                            ))
+                             Consumer<UserProvider>(builder: (context, value, child) {
+                String userAddress = "";
+                for (var i = 0; i < value.users.length; i++) {
+                  userAddress = value.users[i].firstName;
+                }
+                return FadeInUp(
+                  duration: const Duration(milliseconds: 1700),
+                  child: Text(
+                    '$userAddress , User',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900),
+                  ),
+                );
+              }),
+                            // FadeInUp(duration: const Duration(milliseconds: 1700), child: const Row(
+                            //   children: [
+                                
+                                
+                            //     // Text("VIEW MORE", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                            //     //  SizedBox(width: 5,),
+                            //     // Icon(Icons.arrow_forward_ios, color: Colors.white, size: 15,)
+                            //   ],
+                            // ))
                           ],
                         ),
                       ),

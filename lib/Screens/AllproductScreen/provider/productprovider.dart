@@ -31,6 +31,14 @@ class ProductProvider with ChangeNotifier {
   List<ProductModel> get products {
     return [..._products];
   }
+    List<ProductModel> _searchProducts = [];
+  List<ProductModel> get searchProducts {
+    return [..._searchProducts];
+  }
+  List<ProductModel> _filteredProducts = [];
+  List<ProductModel> get filteredProducts {
+    return [..._filteredProducts];
+  }
 
   Future getAllProductData({required BuildContext context}) async {
     try {
@@ -49,6 +57,7 @@ class ProductProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         _isLoading = false;
         _products = [];
+         _filteredProducts = [];
         var extractedData = json.decode(response.body);
         //  print(json.decode(response.body) + 'printed extrated data');
         final List<dynamic> productDetails = extractedData['products'];
@@ -58,7 +67,7 @@ class ProductProvider with ChangeNotifier {
               id:productDetails[i]['id'].toString(),
               name: productDetails[i]['name'].toString(),
               categoryId: productDetails[i]['category_id'].toString(),
-              file: productDetails[i]['file'].toString(),
+             
               quantity: productDetails[i]['quantity'].toString(),
               description: productDetails[i]['description'].toString(),
               additionalInformation: productDetails[i]['additional_information'].toString(),
@@ -69,6 +78,7 @@ class ProductProvider with ChangeNotifier {
               ownerPhone: productDetails[i]['owner_phone'].toString(),
               ownerAddress: productDetails[i]['owner_address'].toString(),
               ownerUnitName: productDetails[i]['owner_unit_name'].toString(),
+               file: productDetails[i]['file'.toString()]
 
             ),
           );
@@ -92,6 +102,64 @@ class ProductProvider with ChangeNotifier {
       _isSelect = false;
       notifyListeners();
     }
+  }
+   Future<void> getSearchData({dynamic value}) async {
+    _isLoading = true;
+    var response = await https.get(
+      Uri.parse(
+          "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/search_product.php?keyword=$value"),
+    );
+
+    print(
+        "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/search_product.php?keyword=$value");
+
+    if (response.statusCode == 200) {
+      var responseBody = response.body;
+
+        print(responseBody);
+
+        _searchProducts = [];
+
+        var extractedData = json.decode(response.body);
+        //  print(json.decode(response.body) + 'printed extrated data');
+        final List<dynamic> productDetails = extractedData['products'];
+        for (var i = 0; i < productDetails.length; i++) {
+          _searchProducts.add(
+           ProductModel(
+              id:productDetails[i]['id'].toString(),
+              name: productDetails[i]['name'].toString(),
+              categoryId: productDetails[i]['category_id'].toString(),
+             
+              quantity: productDetails[i]['quantity'].toString(),
+              description: productDetails[i]['description'].toString(),
+              additionalInformation: productDetails[i]['additional_information'].toString(),
+              price: productDetails[i]['price'].toString(),
+              ownerId: productDetails[i]['owner_id'].toString(),
+              ownerName: productDetails[i]['owner_name'].toString(),
+              ownerEmail: productDetails[i]['owner_email'].toString(),
+              ownerPhone: productDetails[i]['owner_phone'].toString(),
+              ownerAddress: productDetails[i]['owner_address'].toString(),
+              ownerUnitName: productDetails[i]['owner_unit_name'].toString(),
+               file: productDetails[i]['file'.toString()]
+
+            ),
+          );
+        }
+
+        print('product details search' + _searchProducts.toString());
+        print('products loading completed --->' + 'loading data');
+          _isLoading = false;
+        notifyListeners();
+
+
+    } else {
+        _isLoading = false;
+          notifyListeners();
+      print('Failed to fetch data. Status code: ${response.statusCode}');
+    }
+
+    _isLoading = false;
+    notifyListeners();
   }
  
 }
