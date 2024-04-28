@@ -36,20 +36,21 @@ class CartProvider extends ChangeNotifier {
     return [..._carts];
   }
 
+ 
   double totalAmount = 0.0;
 
-  // void updateQuantity(int index, String newQuantity) {
-  //   _carts[index].quantity = newQuantity;
-  //   calculateTotalPrice();
-  //   notifyListeners();
-  // }
+  void updateQuantity(int index, String newQuantity) {
+    _carts[index].quantity = newQuantity;
+    calculateTotalPrice();
+    notifyListeners();
+  }
 
-  // // Calculate total amount
-  // double addQuantity(String price) {
-  //   totalAmount += int.parse(price) * 1;
-  //   notifyListeners();
-  //   return totalAmount;
-  // }
+  // Calculate total amount
+  double addQuantity(String price) {
+    totalAmount += int.parse(price) * 1;
+    notifyListeners();
+    return totalAmount;
+  }
 
   double removeQuantity(String price) {
     totalAmount -= int.parse(price) * 1;
@@ -57,14 +58,14 @@ class CartProvider extends ChangeNotifier {
     return totalAmount;
   }
 
-  // double calculateTotalPrice() {
-  //   totalAmount = 0.0;
-  //   for (var item in _carts) {
-  //     totalAmount += int.parse(item.price) * int.parse(item.quantity);
-  //   }
-  //   // notifyListeners();
-  //   return double.parse(totalAmount.toString());
-  // }
+  double calculateTotalPrice() {
+    totalAmount = 0.0;
+    for (var item in _carts) {
+      totalAmount += int.parse(item.price) * int.parse(item.quantity);
+    }
+    // notifyListeners();
+    return double.parse(totalAmount.toString());
+  }
 
   Future getAllCartsData({BuildContext? context, String? userid}) async {
     try {
@@ -107,7 +108,7 @@ class CartProvider extends ChangeNotifier {
                 ),
           );
         }
-     //   calculateTotalPrice();
+        calculateTotalPrice();
 
      //   print('product details' + _carts.toString());
         _isLoading = false;
@@ -128,6 +129,35 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+Future<void> addItemToCart(
+      {String? productId, String? userid,String? quanity}) async {
+    var body = {
+      'product_id': productId.toString(),
+      'userid': userid.toString(),
+      'quantity':quanity.toString()
+
+    
+    };
+
+    try {
+      var response = await https.post(
+          Uri.parse(
+              'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/add_to_cart.php?product_id=$productId&quantity=$quanity&userid=$userid'),
+          body: body);
+
+      if (response.statusCode == 200) {
+        // Request successful
+        print('Added to cart successfully');
+        print('Response: ${response.body}');
+      } else {
+        // Request failed with error code
+        print('Failed to add to cart. Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Exception thrown during request
+      print('Failed to add to cart. Exception: $e');
+    }
+  }
   Future<void> deleteCart(String? cartId, BuildContext context) async {
   //  final user = Provider.of<UserProvider>(context, listen: false);
     final url = Uri.parse(
@@ -158,7 +188,7 @@ class CartProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         print(url);
-       // getAllCartsData();
+        getAllCartsData();
         // Cart deleted successfully
         print('Cart deleted successfully');
       } else {
@@ -189,8 +219,7 @@ class CartProvider extends ChangeNotifier {
       print('Error quantity update: $e');
     }
   }
-}
-Future<void> placeOrderApi({String? userid}) async {
+  Future<void> placeOrderApi({String? userid}) async {
     final url = Uri.parse(
         'http://campus.sicsglobal.co.in/Project/Local_farmers_Market/api/placed_order.php?user_id=$userid');
 
@@ -198,6 +227,10 @@ Future<void> placeOrderApi({String? userid}) async {
       final response = await https.get(url);
 
       if (response.statusCode == 200) {
+        clearCart(userid: userid);
+
+        print(response.body);
+
         print(url);
 
         print('Placed order successfully');
@@ -209,4 +242,7 @@ Future<void> placeOrderApi({String? userid}) async {
       print('Error place oder: $e');
     }
   }
+}
+
+  
 

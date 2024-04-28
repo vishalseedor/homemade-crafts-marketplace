@@ -50,7 +50,7 @@ class _AllFavouriteWidgetState extends State<AllFavouriteWidget> {
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 13,
               ),
             ),
           ),
@@ -65,7 +65,7 @@ class _AllFavouriteWidgetState extends State<AllFavouriteWidget> {
           child: Center(
             child: IconButton(
               icon:  Icon(
-          isfav ? Icons.favorite : Icons.favorite_outline,
+          isfav ? Icons.delete : Icons.delete,
           color: isfav ? Colors.red : Colors.black,
         ),
               onPressed: () {

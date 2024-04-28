@@ -62,7 +62,7 @@ class _AllEachCategoryWidgetState extends State<AllEachCategoryWidget > {
               child: 
               Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(widget.productname, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),)
+                child: Text(widget.productname,style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),)
               ),
             ),
           ),

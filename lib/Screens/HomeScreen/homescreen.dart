@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/new.png'),
+            image: AssetImage('assets/cv.png'),
             fit: BoxFit.cover
           )
         ),
@@ -63,9 +63,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                FadeInUp(duration: const Duration(milliseconds: 1000), child: const Text("Homemade crafts marketplace", style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900),)),
+                FadeInUp(duration: const Duration(milliseconds: 1000), child: const Text("Homemade crafts marketplace", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w900),)),
                 const SizedBox(height: 20,),
-                FadeInUp(duration: const Duration(milliseconds: 1300), child: const Text("Let's start with purchase", style: TextStyle(color: Colors.white, fontSize: 20),)),
+                FadeInUp(duration: const Duration(milliseconds: 1300), child: const Text("Let's start with purchase", style: TextStyle(color: Colors.white, fontSize: 16),)),
                 const SizedBox(height: 100,),
                 InkWell(
                   onTap: () {
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(50)
                         ),
                         child: Center(
-                          child: hide == false ? const Text("Get Start", style: TextStyle(fontWeight: FontWeight.bold),) : Container(),
+                          child: hide == false ? const Text("GET STARTED", style: TextStyle(fontWeight: FontWeight.bold),) : Container(),
                         ),
                       )),
                     ),

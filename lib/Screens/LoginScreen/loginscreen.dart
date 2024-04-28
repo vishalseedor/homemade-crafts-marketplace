@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Screens/HomeScreen/homescreen.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/models/usermodel.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:homemade_marketplace_project/Screens/RegisterScreen/registerscreen.dart';
 import 'package:http/http.dart'as http;
+import 'package:provider/provider.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -17,28 +20,44 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  late bool _passwordVisible;
   TextEditingController emailcontroller=TextEditingController();
   TextEditingController passwordcontroller=TextEditingController();
   
   final _formKey = GlobalKey<FormState>();
-  void loginHomemadecraft(String email, String password) async {
+ void loginHomemadecraft(String email, String password) async {
     const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/login.php';
 
     Map<String, String> body = {'email': email, 'password': password};
 
-    try {
+  try {
       final response = await http.post(
         Uri.parse(url),
         body: body,
       );
+      print(url);
       var jsonData = json.decode(response.body);
-
+      print(jsonData);
+      print(jsonData["status"]);
       if (response.statusCode == 200) {
         if (jsonData['status'] == true) {
+          //      getstorage.write("phone",loginModel!.phone.toString());
+          // getstorage.write("password",loginModel!.password.toString());
+          // getstorage.read(phone);
+          // phone=getstorage.read("phone");
+
+          List user = jsonData['user_data'];
+          if (user.isNotEmpty) {
+            ProfileModel userdata = ProfileModel.fromJson(user[0]);
+            String userId = userdata.userid;
+            Provider.of<UserProvider>(context, listen: false)
+                .setCurrentUserId(userId);
+            print(userId);
+          }
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: colors,
+              backgroundColor:  Color.fromARGB(255, 23, 77, 25),
               content: const Text(
                 'Login Successful!',
                 style:
@@ -47,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               duration: const Duration(seconds: 4),
             ),
           );
+
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -55,12 +75,11 @@ class _LoginPageState extends State<LoginPage> {
           print("Response body${response.body}");
 
           print('Login successful');
-        } else {
-          jsonData['status'] == false;
+        } else if (jsonData['status'] == false) {
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: colors,
+              backgroundColor: Color.fromARGB(255, 23, 77, 25), 
               content: const Text(
                 'Invalid email and password',
                 style:
@@ -77,6 +96,11 @@ class _LoginPageState extends State<LoginPage> {
     } catch (error) {
       print('Error: $error');
     }
+  }
+    @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
   }
   @override
   Widget build(BuildContext context) {
@@ -124,11 +148,14 @@ class _LoginPageState extends State<LoginPage> {
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
+                      
                       controller: emailcontroller,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.email_outlined,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                           errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
@@ -153,14 +180,32 @@ class _LoginPageState extends State<LoginPage> {
                     height: 60,
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: TextFormField(
+                      
                       controller: passwordcontroller,
-                      obscureText: true,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      obscureText: _passwordVisible,
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.lock_outline,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                           errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
+                       suffixIcon:  IconButton(
+                                  icon: Icon(
+                                   
+                                     _passwordVisible
+                                     ? Icons.visibility
+                                     : Icons.visibility_off,
+                                     color: colors
+                                     ),
+                                  onPressed: () {
+                                 
+                                     setState(() {
+                                         _passwordVisible = !_passwordVisible;
+                                     });
+                                   },
+                                  ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: colors)),
@@ -179,11 +224,11 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                        color: colors, fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
+                  // Text(
+                  //   "Forgot Password?",
+                  //   style: TextStyle(
+                  //       color: colors, fontSize: 14, fontWeight: FontWeight.bold),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -207,11 +252,11 @@ class _LoginPageState extends State<LoginPage> {
                 
                     
                       child: const Text(
-                        "SIGN IN",
+                        "LOGIN",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                            fontSize: 15),
                       ),
                     ),
                   ),

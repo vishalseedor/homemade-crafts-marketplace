@@ -44,7 +44,7 @@ class _AllCartWidgetState extends State<AllCartWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(widget.productname,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10),),
+                          Text(widget.productname,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 8),),
                           IconButton(onPressed: (){
                              cart.deleteCart(widget.cartid,context);
                        ScaffoldMessenger.of(context).showSnackBar(

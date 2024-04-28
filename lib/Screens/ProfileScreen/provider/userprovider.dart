@@ -60,11 +60,11 @@ class UserProvider with ChangeNotifier {
         _users = [];
         var extractedData = json.decode(response.body);
         //  print(json.decode(response.body) + 'printed extrated data');
-        final List<dynamic> userDetails = extractedData['profile'];
+        final List<dynamic> userDetails = extractedData['user_data'];
         for (var i = 0; i < userDetails.length; i++) {
           _users.add(
             ProfileModel(
-                id: userDetails[i]['id'].toString(),
+                userid: userDetails[i]['userid'].toString(),
                 firstName: userDetails[i]['first_name'].toString(),
                 lastName: userDetails[i]['last_name'].toString(),
                 email: userDetails[i]['email'].toString(),

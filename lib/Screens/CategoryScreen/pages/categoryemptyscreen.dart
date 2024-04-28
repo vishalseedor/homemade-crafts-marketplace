@@ -16,16 +16,14 @@ class _CategoryEmptyScreenState extends State<CategoryEmptyScreen> {
     return 
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+       // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 150),
-          Center(child: Image.asset('assets/cate.png',scale: 3)),
+          Center(child: Image.asset('assets/n.png',scale: 1.8)),
+         // SizedBox(height: size.height*0.02),
+          const Center(child: Text('Your Category is Empty....!',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 12),),),
           SizedBox(height: size.height*0.02),
-          const Center(child: Text('Your Category is Empty....!',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),),
-          SizedBox(height: size.height*0.02),
-          ElevatedButton(onPressed: (){},
-          style: ElevatedButton.styleFrom(backgroundColor: colors),
-           child:const Text('Add to Cart',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+          
         ],
       );
     

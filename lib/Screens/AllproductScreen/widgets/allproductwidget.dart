@@ -16,42 +16,32 @@ class AllProductWidget extends StatefulWidget {
 class _AllProductWidgetState extends State<AllProductWidget> {
   @override
   Widget build(BuildContext context) {
-     return GestureDetector(
+    return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetailsPage.routeName,arguments:widget.id);
+      Navigator.of(context).pushNamed(ProductDetailsPage.routeName,arguments:widget.id);
       },
       child: Card(
-        
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           side: BorderSide(color: Colors.grey.shade200),
         ),
-        elevation: 1,
+        elevation: 0.1,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(                                               
-              height: 150,
+              height: 126,
               alignment: Alignment.topRight,
               width: double.infinity,
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/category4.jpg'),
+                  image: AssetImage('assets/category3.jpg'),
                   fit: BoxFit.cover,
                 ),   
               ),
-              child: SizedBox(
-                width: 30,
-                height: 30,
-                child: IconButton.filledTonal(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {}, 
-                  iconSize: 18,
-                  icon: const Icon(Icons.favorite_border),
-                ),
-              ),
+             
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
@@ -62,9 +52,10 @@ class _AllProductWidgetState extends State<AllProductWidget> {
                     padding: const EdgeInsets.only(bottom: 6.0),
                     child: Text(
                       widget.productname,
-                      style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold,fontSize: 11,color: colors),
                     ),
                   ),
+                 // SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -72,11 +63,10 @@ class _AllProductWidgetState extends State<AllProductWidget> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "₹${widget.price}",
-                                style:TextStyle(color: colors,fontWeight: FontWeight.bold)),
-                            // TextSpan(
-                            //     text: "/${'22'}",
-                            //     style: Theme.of(context).textTheme.bodySmall),
+                                text: "₹ :  ${widget.price}",
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black,fontWeight: FontWeight.bold)),
+
+                           
                           ],
                         ),
                       ),
@@ -87,11 +77,13 @@ class _AllProductWidgetState extends State<AllProductWidget> {
                       //     padding: EdgeInsets.zero,
                       //     onPressed: () {},
                       //     iconSize: 18,
-                      //     icon: const Icon(Icons.add),
+                      //     icon: const Icon(Icons.add,color: Colors.white,),
                       //   ),
                       // )
                     ],
-                  )
+                  ),
+                  // SizedBox(height: size.height*0.01),
+                  // Text(widget.area)
                 ],
               ),
             )

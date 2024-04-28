@@ -1,7 +1,5 @@
 
 
-
-import 'package:homemade_marketplace_project/Screens/CartScreen/provider/addtocartprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CartScreen/provider/cartprovider.dart';
 import 'package:homemade_marketplace_project/Screens/EachCategoryscreen.dart/provider/categoryeachprovider.dart';
 import 'package:homemade_marketplace_project/Screens/FavouriteScreen/provider/favouriteprovider.dart';
@@ -17,7 +15,6 @@ List<SingleChildWidget> multiprovider = [
   ChangeNotifierProvider(create: (context)=>CartProvider()),
   ChangeNotifierProvider(create: (context)=>FavouriteProvider()),
   ChangeNotifierProvider(create: (context)=>CategoryEachProvider()),
-  ChangeNotifierProvider(create: (context)=>AddtoCartProvider()),
   ChangeNotifierProvider(create: (context)=>UserProvider())
 
 ];

@@ -11,6 +11,7 @@ import 'package:homemade_marketplace_project/Screens/AllproductScreen/pages/allp
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/pages/categoryscreen.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/provider/categoryprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/widgets/categorywidget.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/pages/profilescreen.dart';
 import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +66,13 @@ class _ShopPageState extends State<ShopPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
+                            
+                          FadeInUp(duration: const Duration(milliseconds: 1200), child: IconButton(
+                            icon: const Icon(Icons.person, color: Colors.white,), onPressed: () {
+                            Navigator.push(context,MaterialPageRoute(builder:(context)=>const ProfilePage()));
+                            },
+                          )),
+                          
                           FadeInUp(duration: const Duration(milliseconds: 1200), child: IconButton(
                             icon: const Icon(Icons.favorite, color: Colors.white,), onPressed: () {
                             Navigator.push(context,MaterialPageRoute(builder:(context)=>const FavouriteScreen()));
@@ -82,24 +90,24 @@ class _ShopPageState extends State<ShopPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            FadeInUp(duration: const Duration(milliseconds: 1500), child: const Text("Our Homemade Crafts Products", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),)),
+                            FadeInUp(duration: const Duration(milliseconds: 1500), child: const Text("Our Homemade Crafts Products", style: TextStyle(color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),)),
                             const SizedBox(height: 15,),
-                             Consumer<UserProvider>(builder: (context, value, child) {
-                String userAddress = "";
-                for (var i = 0; i < value.users.length; i++) {
-                  userAddress = value.users[i].firstName;
-                }
-                return FadeInUp(
-                  duration: const Duration(milliseconds: 1700),
-                  child: Text(
-                    '$userAddress , User',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900),
-                  ),
-                );
-              }),
+              //                Consumer<UserProvider>(builder: (context, value, child) {
+              //   String userAddress = "";
+              //   for (var i = 0; i < value.users.length; i++) {
+              //     userAddress = value.users[i].firstName;
+              //   }
+              //   return FadeInUp(
+              //     duration: const Duration(milliseconds: 1700),
+              //     child: Text(
+              //       '$userAddress , User',
+              //       style: const TextStyle(
+              //           color: Colors.black,
+              //           fontSize: 10,
+              //           fontWeight: FontWeight.w900),
+              //     ),
+              //   );
+              // }),
                             // FadeInUp(duration: const Duration(milliseconds: 1700), child: const Row(
                             //   children: [
                                 
@@ -125,12 +133,12 @@ class _ShopPageState extends State<ShopPage> {
                    Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("Categories", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                      Text("Categories", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),),
                       InkWell(
                         onTap: () {
                           Navigator.push(context,MaterialPageRoute(builder: (context)=>const CategoryNewScreen()));
                         },
-                        child: Text("All"))
+                        child: Text("View all",style: TextStyle(color: colors,fontWeight: FontWeight.bold,fontSize: 13),))
                     ],
                   ),
                   const SizedBox(height: 20,),
@@ -181,17 +189,17 @@ class _ShopPageState extends State<ShopPage> {
                   //     ],
                   //   ),
                   // ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 20,),
 
                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children:[
-                      Text("People Near You", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                      Text("People Near You", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),),
                       InkWell(
                         onTap: (){
                           Navigator.push(context,MaterialPageRoute(builder: (context)=>const AllProductsScreen()));
                         },
-                        child: Text("All"))
+                        child: Text("View all",style: TextStyle(color: colors,fontWeight: FontWeight.bold),))
                     ],
                   ),
                   const SizedBox(height: 20,),

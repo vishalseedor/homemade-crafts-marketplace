@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CartModel {
   final String id;
   final String productId;
-  final String quantity;
+ String quantity;
   final String userId;
   final String checkoutStatus;
   final String createdAt;

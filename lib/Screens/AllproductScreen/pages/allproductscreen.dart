@@ -31,6 +31,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
       final product= Provider.of<ProductProvider>(context);
       final size=MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor:colors,
@@ -45,18 +46,22 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                   controller: searchController,
                   keyboardType: TextInputType.text,
                   decoration:  InputDecoration(
-                    fillColor: Colors.grey[200],
+                    
+                    fillColor: Colors.white,
                     filled: true,
                     prefixIcon: Icon(
                       Icons.search,
-                     // size: 17,
+                     size: 24,
                     ),
                     hintText: "Search a Products",
                     hintStyle: TextStyle(
                         color: Colors.grey,
-                       fontSize: 14,
+                       fontSize: 13,
                         fontWeight: FontWeight.w600),
-                    border: InputBorder.none,
+                    border:OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(99),
+                      borderSide: BorderSide.none
+                    )
                     // focusedBorder: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.black),
@@ -108,7 +113,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                               crossAxisCount: 2,
                                               crossAxisSpacing: 10,
                                               mainAxisSpacing: 10,
-                                              childAspectRatio: 0.7),
+                                              childAspectRatio: 0.85),
                                       scrollDirection: Axis.vertical,
                                       itemCount: product.searchProducts.length,
                                       itemBuilder: (context, intex) {
@@ -131,12 +136,11 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                               crossAxisCount: 2,
                                               crossAxisSpacing: 10,
                                               mainAxisSpacing: 10,
-                                              childAspectRatio: 0.7),
+                                              childAspectRatio: 0.85),
                                       scrollDirection: Axis.vertical,
                                       itemCount: product.products.length,
                                       itemBuilder: (context, intex) {
-                                      
-                                        return  AllProductWidget(
+                                        return AllProductWidget(
                                           id: product.products[intex].id,
                                           productname: product.products[intex].name,
                                           price: product.products[intex].price,
@@ -146,7 +150,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                         );
                                       },
                                     ),
-                                  ),
+                                  )
              ),         
            )
           

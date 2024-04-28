@@ -32,7 +32,7 @@ class _CategoryNewScreenState extends State<CategoryNewScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: colors,
-        title: Text('Category Products',style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 16),),
+        title: Text('Category Products',style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
         
       ),
       body  :Padding(

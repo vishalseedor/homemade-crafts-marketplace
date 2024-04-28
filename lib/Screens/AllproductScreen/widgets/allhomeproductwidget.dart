@@ -14,13 +14,13 @@ class _AllHomeProductWidgetState extends State<AllHomeProductWidget> {
   @override
   Widget build(BuildContext context) {
    return AspectRatio(
-      aspectRatio: 3 / 2.2,
+      aspectRatio: 2.1 / 2,
       child: Container(
         margin: const EdgeInsets.only(right: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image:  DecorationImage(
-            image: AssetImage('assets/category4.jpg'),
+            image: AssetImage('assets/category3.jpg'),
             fit: BoxFit.cover
           )
         ),
@@ -39,7 +39,7 @@ class _AllHomeProductWidgetState extends State<AllHomeProductWidget> {
           child: 
           Align(
             alignment: Alignment.bottomLeft,
-            child: Text(widget.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),)
+            child: Text(widget.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),)
           ),
         ),
       ),

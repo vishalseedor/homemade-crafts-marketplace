@@ -47,7 +47,7 @@ class _AllCategoryNewWidgetState extends State<AllCategoryNewWidget> {
               child: 
               Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(widget.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),)
+                child: Text(widget.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),)
               ),
             ),
           ),

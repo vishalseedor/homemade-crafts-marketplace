@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class ProfileModel {
-  final String id;
+  final String userid;
   final String firstName;
   final String lastName;
   final String email;
@@ -10,7 +10,7 @@ class ProfileModel {
   final String photo;
 
   ProfileModel(
-      {required this.id,
+      {required this.userid,
       required this.firstName,
       required this.lastName,
       required this.email,
@@ -18,7 +18,7 @@ class ProfileModel {
       required this.photo});
 factory  ProfileModel.fromJson(Map<String, dynamic> json) {
   return ProfileModel
-  (id: json['id'], 
+  (userid: json['userid'], 
   firstName: json['first_name'],
    lastName: json['last_name'],
     email: json['email'],

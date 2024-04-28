@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Screens/AllproductScreen/provider/productprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CartScreen/pages/cartscreen.dart';
-import 'package:homemade_marketplace_project/Screens/CartScreen/provider/addtocartprovider.dart';
+import 'package:homemade_marketplace_project/Screens/CartScreen/provider/cartprovider.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -28,7 +29,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-     final cartapi = Provider.of<AddtoCartProvider>(context, listen: false);
+     final cartapi = Provider.of<CartProvider>(context, listen: false);
+     final user=Provider.of<UserProvider>(context,listen: false);
           final productData =
         Provider.of<ProductProvider>(context).products.firstWhere((element) => element.id == widget.id);
   
@@ -50,12 +52,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           padding: const EdgeInsets.all(16),
           children: [
             Container(
-              height: 300,
+              height: 330,
               width: double.infinity,
               margin: const EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
                 image: const DecorationImage(
-                  image:  AssetImage('assets/category1.jpg'),
+                  image:  AssetImage('assets/category3.jpg'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -63,7 +65,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             Text(
               productData.name,
-              style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+              style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
             ),
             const SizedBox(height: 5),
             Row(
@@ -72,7 +74,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 Text(
                   "Available in stock",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).colorScheme.primary,fontSize: 12
                       ),
                 ),
                
@@ -80,7 +82,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             const SizedBox(height: 10),
         
-            Text('₹ : ${productData.price}',style: TextStyle(fontWeight: FontWeight.bold,color: colors,fontSize: 16),),
+            Text('₹ : ${productData.price}',style: TextStyle(fontWeight: FontWeight.bold,color: colors,fontSize: 15),),
             // Row(
             //   children: [
             //     Icon(
@@ -131,7 +133,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 5),
         
-             Text(productData.description),
+             Text(productData.description,style: TextStyle(fontSize: 13,fontWeight: FontWeight.w300),),
                const SizedBox(height: 10),
               Text('Owner Name:  ${productData.ownerName}',style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
                const SizedBox(height: 10),
@@ -162,7 +164,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             //     ],
             //   ),
             // ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
           
            
             // SizedBox(
@@ -190,13 +192,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             //     itemCount: garden.gardens.length,
             //   ),
             // ),
-            const SizedBox(height: 20),
+        
             SizedBox(
               height: 50,
               child: FilledButton.icon(
                 style: FilledButton.styleFrom(backgroundColor:colors ),
                   onPressed: ()async {
-                    cartapi.addItemToCart(productid:productData.id,quanity:'0'); 
+                    cartapi.addItemToCart(productId: productData.id.toString(),userid: user.currentUserId.toString(),quanity: productData.quantity.toString()); 
                                   ScaffoldMessenger.of(context).showSnackBar(
                        SnackBar(
                         backgroundColor: colors,

@@ -19,12 +19,14 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 80),
-          Center(child: Image.asset('assets/empty.jpg',scale: 3)),
+          Center(child: Image.asset('assets/buy.png',scale: 1.8)),
           SizedBox(height: size.height*0.02),
           const Center(child: Text('Your Cart is Empty....!',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),),
           SizedBox(height: size.height*0.02),
           ElevatedButton(onPressed: (){},
-          style: ElevatedButton.styleFrom(backgroundColor: colors),
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+            backgroundColor: colors),
            child:const Text('Add to Cart',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
         ],
       );

@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Helpers/provider.dart';
 import 'package:homemade_marketplace_project/Helpers/routues.dart';
+import 'package:homemade_marketplace_project/Screens/HomeScreen/homescreen.dart';
 import 'package:homemade_marketplace_project/Screens/LoginScreen/loginscreen.dart';
+import 'package:homemade_marketplace_project/Screens/SplashScreen/splashscreen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor:colors),
           useMaterial3: true,
         ),
-        home: const LoginPage(),
+        home: const HomePage(),
         routes: customRoutes
           
           

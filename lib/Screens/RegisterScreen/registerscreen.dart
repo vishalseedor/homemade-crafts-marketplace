@@ -21,70 +21,66 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController passwordcontroller=TextEditingController();
 
       final _formKey = GlobalKey<FormState>();
-void registerHomemadeCraft(String firstname, String lastname,String email,String phone,String password) async {
-    const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/registration.php';
+Future<void>registerHomemadeCraft(
 
-    Map<String, String> body = {
-      'firstname':firstname,
-      'lastname':lastname,
-      'email':email,
-      'phone':phone,
-      'password':password,
+String firstname,String lastname,String email,String phone,String password) async {
+  const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/registration.php';
 
-    
-    };
+  Map<String, String> body = {
+  
+    'firstname':firstname,
+    'lastname': lastname,
+    'email': email,
+    'phone': phone,
+    'password': password,
+  
+  };
 
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: body,
-      );
-      var jsonData = json.decode(response.body);
+ try {
+    final response = await http.post(
+      Uri.parse(url),
+      body: body,
+      
+    );
+       var jsonData=json.decode(response.body);
 
       if (response.statusCode == 200) {
-        if (jsonData["status"] == true) {
+      if(jsonData['status']==true){
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: colors,
-              content: const Text(
-                'Login Successful!',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              duration: const Duration(seconds: 4),
-            ),
-          );
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const LoginPage()));
-          print(body);
-          print("Response body${response.body}");
 
-          print('Register successful');
-        } else {
-          jsonData["status"] == false;
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor:colors,
-              content: const Text(
-                'Email already Exists',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              duration: const Duration(seconds: 4),
-            ),
-          );
-          print('Error: ${response.statusCode}');
-        }
-      } else {
-        print('fffff');
+         SnackBar(
+          backgroundColor:colors,
+          content: const Text('Register Successful!',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+          duration: const Duration(seconds: 4),
+        ),
+      );
+      Navigator.push(context,MaterialPageRoute(builder:(context)=>const LoginPage()));
+      print(body);
+      print("Response body${response.body}");
+    
+      print('Registration successful');
       }
-    } catch (error) {
-      print('Error: $error');
+      else{
+        jsonData['status']==false;
+         // ignore: use_build_context_synchronously
+         ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+          backgroundColor:colors ,
+          content: const Text('User Already Exists !',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+          duration: const Duration(seconds: 4),
+        ),
+      );
+         print('Error: ${response.statusCode}');
+      }
+     
+    } else {
+       
+     print('fffff');
     }
+  } catch (error) {
+    print('Error: $error');
   }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,10 +124,12 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     child: TextFormField(
                       controller: firstnamecontroller,
                       keyboardType: TextInputType.text,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "First Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.person_outline,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                        errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
@@ -158,10 +156,12 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     child: TextFormField(
                       controller: lastnamecontroller,
                       keyboardType: TextInputType.text,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Last Name",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.person_outline,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                        errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
@@ -187,10 +187,12 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     child: TextFormField(
                       controller: emailcontroller,
                       keyboardType: TextInputType.emailAddress,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.email_outlined,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                           errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
@@ -216,11 +218,12 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     child: TextFormField(
                      keyboardType: TextInputType.phone,
                      controller: phonecontroller,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
-                        
+                        prefixIcon: Icon(Icons.phone_android_outlined,color: colors,),
                         hintText: "Phone Number",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
+                           errorStyle: TextStyle(color: Colors.white),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
                         enabledBorder: OutlineInputBorder(
@@ -246,12 +249,14 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     child: TextFormField(
                       controller: passwordcontroller,
                       keyboardType: TextInputType.visiblePassword,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.lock_outline,color: colors,),
+                        hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 14),
                         filled: true,
                         fillColor: const Color(0xff161d27).withOpacity(0.9),
+                           errorStyle: TextStyle(color: Colors.white),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: colors)),
@@ -276,7 +281,7 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                     margin: const EdgeInsets.only(left: 40, right: 40),
                     child: ElevatedButton(
                       
-                      onPressed: (){
+                      onPressed: ()async{
                          if (_formKey.currentState!.validate()) {
                           registerHomemadeCraft(
                             firstnamecontroller.text.toString(),
@@ -288,10 +293,13 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                             
                           );
                         }
+                       
                       },
+                    
                       style: ElevatedButton.styleFrom(backgroundColor: colors,  shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),),
+                      
                 
                     
                       child: const Text(
@@ -299,7 +307,7 @@ void registerHomemadeCraft(String firstname, String lastname,String email,String
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                            fontSize: 14),
                       ),
                     ),
                   ),
