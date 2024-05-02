@@ -20,7 +20,7 @@ class _AllHomeProductWidgetState extends State<AllHomeProductWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image:  DecorationImage(
-            image: AssetImage('assets/category3.jpg'),
+            image:NetworkImage(widget.image),
             fit: BoxFit.cover
           )
         ),

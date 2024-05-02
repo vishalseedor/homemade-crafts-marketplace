@@ -7,7 +7,8 @@ class AllProductWidget extends StatefulWidget {
   final String productname;
   final String price;
   final String quantity;
-  const AllProductWidget({super.key,required this.id,required this.productname,required this.price,required this.quantity});
+  final String image;
+  const AllProductWidget({super.key,required this.id,required this.productname,required this.price,required this.quantity,required this.image});
 
   @override
   State<AllProductWidget> createState() => _AllProductWidgetState();
@@ -37,7 +38,7 @@ class _AllProductWidgetState extends State<AllProductWidget> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/category3.jpg'),
+                  image: NetworkImage(widget.image),
                   fit: BoxFit.cover,
                 ),   
               ),

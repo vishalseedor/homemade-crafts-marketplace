@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:homemade_marketplace_project/Screens/ProfileScreen/models/usermodel.dart';
 import 'package:http/http.dart' as https;
@@ -28,6 +27,7 @@ class UserProvider with ChangeNotifier {
   bool get isError {
     return _isError;
   }
+
 
 
   List<ProfileModel> _users = [];
@@ -64,21 +64,20 @@ class UserProvider with ChangeNotifier {
         for (var i = 0; i < userDetails.length; i++) {
           _users.add(
             ProfileModel(
-                userid: userDetails[i]['userid'].toString(),
-                firstName: userDetails[i]['first_name'].toString(),
-                lastName: userDetails[i]['last_name'].toString(),
-                email: userDetails[i]['email'].toString(),
-                phone: userDetails[i]['phone'].toString(),
-                photo: userDetails[i]['photo'].toString()
-            
-                ),
+              userid: userDetails[i]['userid'].toString(),
+              firstName: userDetails[i]['firstname'].toString(),
+              lastName:  userDetails[i]['lastname'].toString(),
+              email:  userDetails[i]['email'].toString(),
+              phone:  userDetails[i]['phone'].toString(),
+              photo:  userDetails[i]['photo'].toString(),
+            )
           );
         }
         ;
 
-        print('user details' + _users.toString());
+        print('product details' + _users.toString());
         _isLoading = false;
-        print('users loading completed --->' + 'loading data');
+        print('products loading completed --->' + 'loading data');
         notifyListeners();
       } else {
         _isLoading = true;
@@ -86,8 +85,8 @@ class UserProvider with ChangeNotifier {
       }
     } on HttpException catch (e) {
       // ignore: prefer_interpolation_to_compose_strings
-      print('error in user prod -->>' + e.toString());
-      print('User Data is one by one loaded the product' + e.toString());
+      print('error in product prod -->>' + e.toString());
+      print('Product Data is one by one loaded the product' + e.toString());
       _isLoading = false;
 
       _isSelect = false;

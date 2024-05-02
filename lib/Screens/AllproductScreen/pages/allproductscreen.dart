@@ -122,6 +122,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                           productname: product.searchProducts[intex].name,
                                           price: product.searchProducts[intex].price,
                                           quantity: product.searchProducts[intex].quantity,
+                                          image: product.searchProducts[intex].file,
                                           
                                         
                                         );
@@ -145,6 +146,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                           productname: product.products[intex].name,
                                           price: product.products[intex].price,
                                           quantity: product.products[intex].quantity,
+                                          image: product.products[intex].file,
                                           
                                         
                                         );

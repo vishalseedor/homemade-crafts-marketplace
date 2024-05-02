@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor:colors),
           useMaterial3: true,
         ),
-        home: const HomePage(),
+        home: const LoginPage(),
         routes: customRoutes
           
           

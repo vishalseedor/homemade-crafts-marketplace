@@ -15,6 +15,7 @@ class CartModel {
   final String additionalInformation;
   final String ownerId;
   final String price;
+  final String image;
 
   CartModel(
       {required this.id,
@@ -29,6 +30,7 @@ class CartModel {
       required this.productQuantity,
       required this.description,
       required this.additionalInformation,
+      required this.image,
       required this.ownerId,
       required this.price});
 
@@ -47,6 +49,7 @@ class CartModel {
     description:json['description'], 
     additionalInformation: json['additional_information'], 
     ownerId: json['owner_id'], 
+    image: json['photo'],
     price: json['price']);
   
   }

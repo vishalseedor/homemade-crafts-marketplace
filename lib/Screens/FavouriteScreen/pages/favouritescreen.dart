@@ -53,8 +53,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             : favourite.favourites.isEmpty
                                 ? Center(
                                     child: Text(
-                                    'No Categories...',
-                                    style: TextStyle(color:colors),
+                                    'No Favourite Products...',
+                                    style: TextStyle(color:colors,fontWeight: FontWeight.bold),
                                   ))
                                 : SizedBox(
                                     //height: size.height * 0.2,

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:homemade_marketplace_project/Screens/CartScreen/models/cartmodel.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:http/http.dart' as https;
 import 'package:provider/provider.dart';
 
@@ -73,11 +74,11 @@ class CartProvider extends ChangeNotifier {
       // var headers = {'Cookie': 'ci_session=c7lis868nec6nl8r1lb5el72q8n26upv'};
       var response = await https.get(
         Uri.parse(
-            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_cart.php?user_id=39"),
+            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_cart.php?user_id=$userid"),
       );
 
       print(
-          "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_cart.php?user_id=39");
+          "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_cart.php?user_id=$userid");
 
       print(response.body);
 
@@ -104,6 +105,7 @@ class CartProvider extends ChangeNotifier {
                 additionalInformation: cartDetails[i]['additional_information"'].toString(),
                 ownerId: cartDetails[i]['owner_id'].toString(),
                 price: cartDetails[i]['price'].toString(),
+                image: cartDetails[i]['photo'].toString()
 
                 ),
           );
@@ -159,7 +161,7 @@ Future<void> addItemToCart(
     }
   }
   Future<void> deleteCart(String? cartId, BuildContext context) async {
-  //  final user = Provider.of<UserProvider>(context, listen: false);
+  final user = Provider.of<UserProvider>(context, listen: false);
     final url = Uri.parse(
         'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/delete_cart.php?cart_id=$cartId');
 
@@ -167,7 +169,7 @@ Future<void> addItemToCart(
       final response = await https.delete(url);
       print(url);
       if (response.statusCode == 200) {
-        getAllCartsData();
+        getAllCartsData(userid: user.currentUserId);
         // Cart deleted successfully
         print('Cart deleted successfully');
       } else {
@@ -188,8 +190,11 @@ Future<void> addItemToCart(
 
       if (response.statusCode == 200) {
         print(url);
-        getAllCartsData();
-        // Cart deleted successfully
+         print(url);
+        _carts.clear();
+        print("The cart going to emptty please check this");
+        getAllCartsData(userid: userid);
+        notifyListeners();
         print('Cart deleted successfully');
       } else {
         // Failed to delete cart
@@ -221,7 +226,7 @@ Future<void> addItemToCart(
   }
   Future<void> placeOrderApi({String? userid}) async {
     final url = Uri.parse(
-        'http://campus.sicsglobal.co.in/Project/Local_farmers_Market/api/placed_order.php?user_id=$userid');
+        'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/place_order.php?user_id=$userid');
 
     try {
       final response = await https.get(url);

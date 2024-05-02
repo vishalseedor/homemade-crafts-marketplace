@@ -26,11 +26,14 @@ class _LoginPageState extends State<LoginPage> {
   
   final _formKey = GlobalKey<FormState>();
  void loginHomemadecraft(String email, String password) async {
-    const url = 'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/login.php';
+    print(email);
+    print(password);
+    const url =
+        'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/login.php';
 
     Map<String, String> body = {'email': email, 'password': password};
 
-  try {
+    try {
       final response = await http.post(
         Uri.parse(url),
         body: body,
@@ -41,10 +44,7 @@ class _LoginPageState extends State<LoginPage> {
       print(jsonData["status"]);
       if (response.statusCode == 200) {
         if (jsonData['status'] == true) {
-          //      getstorage.write("phone",loginModel!.phone.toString());
-          // getstorage.write("password",loginModel!.password.toString());
-          // getstorage.read(phone);
-          // phone=getstorage.read("phone");
+
 
           List user = jsonData['user_data'];
           if (user.isNotEmpty) {
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor:  Color.fromARGB(255, 23, 77, 25),
+              backgroundColor: colors,
               content: const Text(
                 'Login Successful!',
                 style:
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color.fromARGB(255, 23, 77, 25), 
+              backgroundColor:colors,
               content: const Text(
                 'Invalid email and password',
                 style:

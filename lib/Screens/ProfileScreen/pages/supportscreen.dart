@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -269,7 +270,7 @@ class _SupportScreenState extends State<SupportScreen> {
                     width: size.width * 0.88,
                     child: ElevatedButton(
                         style:
-                            ElevatedButton.styleFrom(backgroundColor:Color.fromARGB(255, 17, 85, 20)),
+                            ElevatedButton.styleFrom(backgroundColor:colors),
                         onPressed: ()async {
                       //   if (_formKey.currentState!.validate()) {
                       //           support.addFeedback(comments: commentcontroller.toString(),userId:userData.currentUserId.toString());                        

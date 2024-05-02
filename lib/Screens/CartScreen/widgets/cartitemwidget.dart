@@ -51,7 +51,7 @@ class _CartItemState extends State<CartItem> {
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/category3.jpg'),
+                        image:NetworkImage(widget.image),
                       ),
                     ),
                   ),

@@ -56,8 +56,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               width: double.infinity,
               margin: const EdgeInsets.only(bottom: 16),
               decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image:  AssetImage('assets/category3.jpg'),
+                image:  DecorationImage(
+                  image:  NetworkImage(productData.file),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -206,7 +206,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         duration: const Duration(seconds: 3),
                       ),
                     );
-                               await Navigator.push(context,MaterialPageRoute(builder: (context)=> const CartScreen()));
+                               await Navigator.push(context,MaterialPageRoute(builder: (context)=> CartScreen()));
                   },
                   icon: const Icon(Icons.shopping_bag),
                   label: const Text("Add to cart",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),

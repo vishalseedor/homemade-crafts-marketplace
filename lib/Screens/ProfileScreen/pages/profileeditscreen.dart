@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:homemade_marketplace_project/Helpers/colors.dart';
+import 'package:homemade_marketplace_project/Screens/AllproductScreen/pages/ShopPage.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -220,9 +223,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   width: size.width * 0.93,
                   child: ElevatedButton(
                       style:
-                          ElevatedButton.styleFrom(backgroundColor:const Color.fromARGB(255, 11, 95, 14),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                          ElevatedButton.styleFrom(backgroundColor:colors,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                       onPressed: () {
-                       // updateProfileApi();
+                      updateProfileApi();
                       },
                       child: const Text(
                         'Update',
@@ -318,55 +321,49 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  // Future<dynamic> updateProfileApi() async {
-  //   try {
-  //     final user = Provider.of<UserProvider>(context, listen: false);
-  //     var request = http.MultipartRequest(
-  //       'POST',
-  //       Uri.parse(
-  //           'http://campus.sicsglobal.co.in/Project/communitygarden/api/edit_profile.php'),
-  //     );
-  //     print(
-  //         'http://campus.sicsglobal.co.in/Project/communitygarden/api/edit_profile.php');
-  //     request.fields.addAll({
-  //       'firstname': userNameController.text.trim(),
-  //       'lastname':'llll',
-  //       'email': addressController.text.trim(),
-  //       'phone': phoneNumberController.text.trim(),
-  //       'password': '2017',
-  //       'state': 'Kerala.',
-  //       'city': 'Varkala',
-  //       'user_id': user.currentUserId ?? "1"
-  //     });
-  //       if (image != null) {
-  //     request.files.add(await http.MultipartFile.fromPath('photo', image!.path));
-  //   }
-  //     http.StreamedResponse response = await request.send();
+  Future<dynamic> updateProfileApi() async {
+    try {
+      final user = Provider.of<UserProvider>(context, listen: false);
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/edit_profile.php'),
+      );
+      print(
+          'http://campus.sicsglobal.co.in/Project/homemade_crafts/API/edit_profile.php');
+      request.fields.addAll({
+        'firstname': userNameController.text.trim(),
+        'lastname':'llll',
+        'email': addressController.text.trim(),
+        'phone': phoneNumberController.text.trim(),
+        'user_id': user.currentUserId ?? "1"
+      });
+        if (image != null) {
+      request.files.add(await http.MultipartFile.fromPath('photo', image!.path));
+    }
+      http.StreamedResponse response = await request.send();
 
-  //     print(await response.stream.bytesToString());
-  //     print(""" 'name': ${userNameController.text.trim()},
-  //       'phone': ${phoneNumberController.text.trim()},
-  //       'email': ${addressController.text.trim},
-  //       'password': '123',
-  //       'address': ${addressController.text.trim()},
-  //       'state': 'Kerala.',
-  //       'user_type': 'Consumer',
-  //       'userid': ${user.currentUserId}?? "1" """);
-  //     if (response.statusCode == 200) {
-  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //                                 backgroundColor:Color.fromARGB(255, 31, 82, 32),
-  //                                 content: const Text("Profile Updated successfully...!",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)));
-  //       Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) => const HomePage()));
+      print(await response.stream.bytesToString());
+      print(""" 'name': ${userNameController.text.trim()},
+        'phone': ${phoneNumberController.text.trim()},
+        'email': ${addressController.text.trim},
+        'password': '123',
+        'user_id': ${user.currentUserId}?? "1" """);
+      if (response.statusCode == 200) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  backgroundColor:colors,
+                                  content: const Text("Profile Updated successfully...!",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShopPage()));
 
-  //       print(await response.stream.bytesToString());
-  //     } else {
-  //       print(response.reasonPhrase);
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+        print(await response.stream.bytesToString());
+      } else {
+        print(response.reasonPhrase);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

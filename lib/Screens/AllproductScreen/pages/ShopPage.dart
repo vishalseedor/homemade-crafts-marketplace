@@ -12,7 +12,6 @@ import 'package:homemade_marketplace_project/Screens/CategoryScreen/pages/catego
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/provider/categoryprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CategoryScreen/widgets/categorywidget.dart';
 import 'package:homemade_marketplace_project/Screens/ProfileScreen/pages/profilescreen.dart';
-import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
@@ -80,7 +79,7 @@ class _ShopPageState extends State<ShopPage> {
                           )),
                           FadeInUp(duration: const Duration(milliseconds: 1300), child: IconButton(
                             icon: const Icon(Icons.shopping_cart, color: Colors.white,), onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                             },
                           )),
                         ],
@@ -91,7 +90,7 @@ class _ShopPageState extends State<ShopPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             FadeInUp(duration: const Duration(milliseconds: 1500), child: const Text("Our Homemade Crafts Products", style: TextStyle(color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),)),
-                            const SizedBox(height: 15,),
+                            const SizedBox(height: 15),
               //                Consumer<UserProvider>(builder: (context, value, child) {
               //   String userAddress = "";
               //   for (var i = 0; i < value.users.length; i++) {

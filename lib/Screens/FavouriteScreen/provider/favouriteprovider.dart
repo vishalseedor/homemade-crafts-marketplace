@@ -35,17 +35,17 @@ class FavouriteProvider extends ChangeNotifier {
     return [..._favourites];
   }
 
-  Future getAllFavouritesData({BuildContext? context}) async {
+  Future getAllFavouritesData({BuildContext? context,String? userid}) async {
     try {
       _isLoading = true;
       // var headers = {'Cookie': 'ci_session=c7lis868nec6nl8r1lb5el72q8n26upv'};
       var response = await https.get(
         Uri.parse(
-            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_favourite.php?user_id=39"),
+            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_favourite.php?user_id=$userid"),
       );
 
       print(
-            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_favourite.php?user_id=39");
+            "http://campus.sicsglobal.co.in/Project/homemade_crafts/API/view_favourite.php?user_id=$userid");
 
       print(response.body);
 
@@ -88,8 +88,8 @@ class FavouriteProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  Future<void> AddtoFavourite({String? petid}) async {
-    final url = Uri.parse('http://campus.sicsglobal.co.in/Project/pet_shop/api/viewfavpets.php?aid=1&petid=$petid');
+  Future<void> AddtoFavourite({String? userid,String? productid}) async {
+    final url = Uri.parse('http://campus.sicsglobal.co.in/Project/homemade_crafts/API/add_favourites.php?user_id=$userid&product_id=$productid');
     
     try {
       final response = await https.post(url);

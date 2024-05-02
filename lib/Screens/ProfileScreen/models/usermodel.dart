@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ProfileModel {
   final String userid;
   final String firstName;
@@ -16,14 +15,13 @@ class ProfileModel {
       required this.email,
       required this.phone,
       required this.photo});
-factory  ProfileModel.fromJson(Map<String, dynamic> json) {
-  return ProfileModel
-  (userid: json['userid'], 
-  firstName: json['first_name'],
-   lastName: json['last_name'],
-    email: json['email'],
-     phone:json['phone'],
-      photo:json['photo']);
 
-    
+ factory ProfileModel.fromJson(Map<String, dynamic> json) {
+  return ProfileModel( userid :json['userid'],
+    firstName :json['firstname'],
+    lastName :json['lastname'],
+    email :json['email'],
+    phone :json['phone'],
+    photo :json['photo'],);
+   
   }}
