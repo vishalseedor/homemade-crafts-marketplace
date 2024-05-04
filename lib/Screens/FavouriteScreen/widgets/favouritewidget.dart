@@ -27,7 +27,7 @@ class _AllFavouriteWidgetState extends State<AllFavouriteWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: AssetImage('assets/category4.jpg'),
+            image: NetworkImage(widget.image),
             fit: BoxFit.cover,
           ),
         ),

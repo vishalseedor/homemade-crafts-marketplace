@@ -5,7 +5,6 @@ import 'package:homemade_marketplace_project/Screens/FavouriteScreen/models/favo
 import 'package:http/http.dart' as https;
 
 
-
 class FavouriteProvider extends ChangeNotifier {
  
   bool _isLoading = false;
@@ -61,7 +60,8 @@ class FavouriteProvider extends ChangeNotifier {
             
               name: favDetails[i]['name'].toString(),
               id: favDetails[i]['id'].toString(),
-              file: favDetails[i]['file'].toString()
+              file: favDetails[i]['file'].toString(),
+              image: favDetails[i]['photo'].toString(),
             
              
               

@@ -5,6 +5,7 @@ import 'package:homemade_marketplace_project/Screens/FavouriteScreen/provider/fa
 
 import 'package:homemade_marketplace_project/Screens/FavouriteScreen/widgets/favouritewidget.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
+import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
 class FavouriteScreen extends StatefulWidget {
@@ -18,9 +19,11 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
     @override
   void initState() {
-    super.initState();
+     final userProvider = Provider.of<UserProvider>(context, listen: false);
+   
     Provider.of<FavouriteProvider>(context, listen: false)
-        .getAllFavouritesData(context: context);
+        .getAllFavouritesData(context: context,userid: userProvider.currentUserId);
+         super.initState();
   }
   @override
   Widget build(BuildContext context) {
@@ -68,7 +71,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                           
                                           id: favourite.favourites[intex].id,
                                           name: favourite.favourites[intex].name,
-                                          image:favourite.favourites[intex].file,
+                                          image:favourite.favourites[intex].image,
                                          
                                         );
                                       },

@@ -130,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
                         userid:cart.carts[intex].userId , 
                         cartid: cart.carts[intex].id,
                          productid:cart.carts[intex].quantity,
-                          image: cart.carts[intex].file, 
+                          image: cart.carts[intex].image, 
                           quanity:cart.carts[intex].quantity, 
                           price: cart.carts[intex].price, 
                           description: cart.carts[intex].description,

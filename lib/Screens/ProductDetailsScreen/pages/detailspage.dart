@@ -2,10 +2,13 @@
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:homemade_marketplace_project/Helpers/colors.dart';
 import 'package:homemade_marketplace_project/Screens/AllproductScreen/provider/productprovider.dart';
 import 'package:homemade_marketplace_project/Screens/CartScreen/pages/cartscreen.dart';
 import 'package:homemade_marketplace_project/Screens/CartScreen/provider/cartprovider.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/pages/favouritescreen.dart';
+import 'package:homemade_marketplace_project/Screens/FavouriteScreen/provider/favouriteprovider.dart';
 import 'package:homemade_marketplace_project/Screens/ProfileScreen/provider/userprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +33,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
      final cartapi = Provider.of<CartProvider>(context, listen: false);
+     final fav=Provider.of<FavouriteProvider>(context,listen: false);
      final user=Provider.of<UserProvider>(context,listen: false);
           final productData =
         Provider.of<ProductProvider>(context).products.firstWhere((element) => element.id == widget.id);
@@ -193,23 +197,45 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             //   ),
             // ),
         
-            SizedBox(
-              height: 50,
-              child: FilledButton.icon(
-                style: FilledButton.styleFrom(backgroundColor:colors ),
-                  onPressed: ()async {
-                    cartapi.addItemToCart(productId: productData.id.toString(),userid: user.currentUserId.toString(),quanity: productData.quantity.toString()); 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                       SnackBar(
-                        backgroundColor: colors,
-                        content: const Text('Item added to cart successfully!',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                        duration: const Duration(seconds: 3),
-                      ),
-                    );
-                               await Navigator.push(context,MaterialPageRoute(builder: (context)=> CartScreen()));
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: ()async {
+                    fav.AddtoFavourite(productid: productData.id.toString(),userid: user.currentUserId.toString());
+                      SnackBar(
+                            backgroundColor: colors,
+                            content: const Text('Item added to Favouite successfully!',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                            duration: const Duration(seconds: 3),
+                          );
+                          await Navigator.push(context,MaterialPageRoute(builder: (context)=>FavouriteScreen()));
                   },
-                  icon: const Icon(Icons.shopping_bag),
-                  label: const Text("Add to cart",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                  child: Container(height: 50,width: 60,decoration: BoxDecoration(color: colors,borderRadius: BorderRadius.circular(5),
+                  
+                  ),
+                  child: Icon(Icons.favorite,color: Colors.white,),
+                  ), 
+                ),
+                SizedBox(
+                  height: 50,
+                
+                  child: FilledButton.icon(
+                    style: FilledButton.styleFrom(backgroundColor:colors ),
+                      onPressed: ()async {
+                        cartapi.addItemToCart(productId: productData.id.toString(),userid: user.currentUserId.toString(),quanity: productData.quantity.toString()); 
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                            backgroundColor: colors,
+                            content: const Text('Item added to cart successfully!',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                                   await Navigator.push(context,MaterialPageRoute(builder: (context)=> CartScreen()));
+                      },
+                      icon: const Icon(Icons.shopping_bag),
+                      label: const Text("Add to cart",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                ),
+              ],
             )
           ],
         ),
